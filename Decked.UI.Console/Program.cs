@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+
+using Decked.Core;
+
 using JetBrains.Annotations;
 using Opt;
 
@@ -26,6 +29,8 @@ namespace Decked.UI.Console
 
             assume(options.MainScreenFilename != null);
             System.Console.WriteLine($"loading screen {Path.GetFullPath(options.MainScreenFilename)}");
+
+            var screen = ScreenConfiguration.Load(options.MainScreenFilename);
         }
     }
 }
