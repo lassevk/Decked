@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="ILogger.cs" />
     <Compile Include="IStreamDeckButton.cs" />
-    <Compile Include="IStreamDeckButtonIdle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

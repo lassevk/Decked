@@ -14,6 +14,10 @@ namespace Decked.Interfaces
 
         event EventHandler IconChanged;
 
+        void OnSetUp();
+        void OnTearDown();
+        void OnIdle();
+
         void Push();
         void Release();
     }

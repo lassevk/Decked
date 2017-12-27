@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 namespace Decked.Example.Notepad
 {
     [PublicAPI]
-    public class NotepadButton : IStreamDeckButton, IStreamDeckButtonIdle
+    public class NotepadButton : IStreamDeckButton
     {
         [CanBeNull]
         private Process _NotepadProcess;
@@ -36,6 +36,16 @@ namespace Decked.Example.Notepad
         public bool IsNotepadRunning => _NotepadProcess != null;
         
         public void Release()
+        {
+            // Do nothing
+        }
+
+        public void OnSetUp()
+        {
+            // Do nothing
+        }
+
+        public void OnTearDown()
         {
             // Do nothing
         }
