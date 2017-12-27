@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decked.Example.Notepad", "Decked.Example.Notepad\Decked.Example.Notepad.csproj", "{94439FE5-E1EE-423D-89EE-15F9A48211CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decked.BuiltIn", "Decked.BuiltIn\Decked.BuiltIn.csproj", "{4AFCB49E-6507-4BFB-A7F9-627C2EEC202D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{94439FE5-E1EE-423D-89EE-15F9A48211CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94439FE5-E1EE-423D-89EE-15F9A48211CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94439FE5-E1EE-423D-89EE-15F9A48211CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AFCB49E-6507-4BFB-A7F9-627C2EEC202D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AFCB49E-6507-4BFB-A7F9-627C2EEC202D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AFCB49E-6507-4BFB-A7F9-627C2EEC202D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AFCB49E-6507-4BFB-A7F9-627C2EEC202D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
