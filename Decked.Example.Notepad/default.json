@@ -1,0 +1,11 @@
+﻿{
+  "assemblies":  {
+    "notepad":  "Decked.Example.Notepad.dll" 
+  },
+  "buttons":  {
+    "1,1":  {
+      "assembly":  "notepad",
+      "type":  "Decked.Example.Notepad.NotepadButton"
+    } 
+  } 
+}
