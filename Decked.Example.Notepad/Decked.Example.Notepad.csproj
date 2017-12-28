@@ -44,10 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NotepadButton.cs" />
+    <Compile Include="IconResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IconResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NotepadApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Decked.BuildingBlocks\Decked.BuildingBlocks.csproj">
+      <Project>{313a03c5-beac-42a8-ab03-4bc2b9a97fd3}</Project>
+      <Name>Decked.BuildingBlocks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Decked.Interfaces\Decked.Interfaces.csproj">
       <Project>{2681b4d4-402e-4a2d-af55-f740dcc25d13}</Project>
       <Name>Decked.Interfaces</Name>
@@ -58,6 +67,16 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ResourceFiles\OffButton.png" />
+    <Content Include="ResourceFiles\OnButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="IconResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IconResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

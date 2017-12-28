@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILogger.cs" />
+    <Compile Include="IStreamDeckApplication.cs" />
     <Compile Include="IStreamDeckButton.cs" />
+    <Compile Include="IStreamDeckServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
