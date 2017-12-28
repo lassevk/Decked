@@ -8,6 +8,7 @@ namespace Decked.Interfaces
     [PublicAPI]
     public interface IStreamDeckButton : INotifyPropertyChanged
     {
+        [NotNull]
         Bitmap Icon
         {
             get;

@@ -1,13 +1,23 @@
 ﻿{
-    "assemblies":  {
-        "notepad":  "Decked.Example.Notepad.dll" 
+    "assemblies": {
       },
-    "buttons":  {
+    "buttons": {
         "1": {
             "1": {
-                "assembly":  "notepad",
-                "type":  "Decked.Example.Notepad.NotepadButton"
+                "assembly": "Decked.Example.Notepad.dll",
+                "type": "Decked.Example.Notepad.NotepadApplication",
+                "property": "StartNotepadButton"
+              },
+            "2": {
+                "assembly": "Decked.Example.Notepad.dll",
+                "type": "Decked.Example.Notepad.NotepadApplication",
+                "property": "StopNotepadButton"
+              },
+            "3": {
+                "assembly": "Decked.Example.Notepad.dll",
+                "type": "Decked.Example.Notepad.NotepadApplication",
+                "property": "StopNotepadButton"
               }
           }
-      } 
+      }
   }

@@ -34,7 +34,7 @@ namespace Decked.BuildingBlocks
                 return;
 
             Icon = value;
-            OnPropertyChanged();
+            OnPropertyChanged(nameof(Icon));
         }
 
         public void Push() => _PushAction();

@@ -21,6 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DryIoc, Version=2.12.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DryIoc.dll.2.12.6\lib\net45\DryIoc.dll</HintPath>
+    </Reference>
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
@@ -61,6 +66,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Decked.BuildingBlocks\Decked.BuildingBlocks.csproj">
+      <Project>{313a03c5-beac-42a8-ab03-4bc2b9a97fd3}</Project>
+      <Name>Decked.BuildingBlocks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Decked.BuiltIn\Decked.BuiltIn.csproj">
+      <Project>{4afcb49e-6507-4bfb-a7f9-627c2eec202d}</Project>
+      <Name>Decked.BuiltIn</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Decked.Core\Decked.Core.csproj">
       <Project>{1968f79f-9cbd-4635-a714-8657e9aa9750}</Project>
       <Name>Decked.Core</Name>

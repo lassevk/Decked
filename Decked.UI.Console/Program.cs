@@ -2,9 +2,14 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
+using Decked.BuildingBlocks;
 using Decked.Core;
+using Decked.Interfaces;
+
+using DryIoc;
 
 using JetBrains.Annotations;
 using Opt;
@@ -16,18 +21,20 @@ namespace Decked.UI.Console
     [UsedImplicitly]
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
+            PreloadAssemblies();
+
             if (Debugger.IsAttached)
             {
-                await Execute(args);
+                Execute(args);
 
                 return;
             }
 
             try
             {
-                await Execute(args);
+                Execute(args);
             }
             catch (Exception ex)
             {
@@ -37,12 +44,21 @@ namespace Decked.UI.Console
             }
         }
 
-        private static Task Execute(string[] args)
+        private static void PreloadAssemblies()
         {
-            var logger = new ConsoleLogger();
+            GC.KeepAlive(typeof(BasicStreamDeckButton));
+            // GC.KeepAlive(typeof(.. builtin ));
+        }
 
+        private static void Execute(string[] args)
+        {
             var options = OptParser.Parse<CommandLineOptions>(args);
             assume(options != null);
+
+            var logger = new ConsoleLogger(options);
+
+            var container = new Container(Rules.Default.WithAutoConcreteTypeResolution());
+            container.RegisterInstance<ILogger>(logger);
 
             var problems = options.GetProblems().ToList();
             if (problems.Any())
@@ -55,10 +71,23 @@ namespace Decked.UI.Console
             assume(options.MainScreenFilename != null);
             System.Console.WriteLine($"loading screen {Path.GetFullPath(options.MainScreenFilename)}");
 
-            var initialScreen = ScreenConfiguration.Load(options.MainScreenFilename);
+            var initialScreenConfiguration = ScreenConfiguration.Load(options.MainScreenFilename);
+            var pathResolver = new PathResolver(Path.GetDirectoryName(Path.GetFullPath(options.MainScreenFilename)));
+            container.RegisterInstance<IPathResolver>(pathResolver);
 
-            var deck = new DeckRunner(logger, initialScreen);
-            return deck.Run();
+            var deck = new DeckRunner(container, logger, pathResolver);
+            container.RegisterInstance<IStreamDeckServices>(deck);
+
+            deck.InitializeScreen(initialScreenConfiguration);
+
+            //AppDomain.CurrentDomain.AssemblyResolve += delegate(object sender, ResolveEventArgs eventArgs)
+            //                                           {
+            //                                               System.Console.WriteLine(eventArgs.Name);
+
+            //                                               return null;
+            //                                           };
+
+            deck.Run().GetAwaiter().GetResult();
         }
     }
 }

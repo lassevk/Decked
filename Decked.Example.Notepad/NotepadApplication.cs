@@ -86,9 +86,22 @@ namespace Decked.Example.Notepad
         {
             return (from process in Process.GetProcesses()
                     where process != null
-                    let mainModule = process.MainModule
+                    let mainModule = GetMainModule(process)
                     where mainModule != null && StringComparer.CurrentCultureIgnoreCase.Equals(mainModule.ModuleName, "NOTEPAD.EXE")
                     select process).FirstOrDefault();
+        }
+
+        [CanBeNull]
+        private static ProcessModule GetMainModule([NotNull] Process process)
+        {
+            try
+            {
+                return process.MainModule;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

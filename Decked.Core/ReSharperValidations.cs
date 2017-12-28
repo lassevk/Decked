@@ -12,18 +12,32 @@ namespace Decked.Core
         [Conditional("DEBUG")]
         [ContractAnnotation("expression:false => halt")]
         [UsedImplicitly]
-        public static void assume(bool expression, [CallerMemberName] string callerMemberName = null, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
+        public static void assume(bool expression, [CanBeNull] string justification = null, [CallerMemberName] string callerMemberName = null, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
+            string justificationFormatted = justification == null ? string.Empty : $"[{justification}] ";
             if (!expression)
-                Debug.WriteLine($"assumption did not hold in {callerMemberName} at {callerFilePath}#{callerLineNumber}");
+                Debug.WriteLine($"assumption {justificationFormatted}did not hold in {callerMemberName} at {callerFilePath}#{callerLineNumber}");
         }
 
         [ContractAnnotation("expression:false => halt")]
         [UsedImplicitly]
-        public static void assert(bool expression, [CallerMemberName] string callerMemberName = null, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
+        public static void assert(bool expression, [CanBeNull] string assertion = null, [CallerMemberName] string callerMemberName = null, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
         {
+            string assertionFormatted = assertion == null ? string.Empty : $"[{assertion}] ";
             if (!expression)
-                Trace.WriteLine($"assertion failed in {callerMemberName} at {callerFilePath}#{callerLineNumber}");
+                Trace.WriteLine($"assertion {assertionFormatted} failed in {callerMemberName} at {callerFilePath}#{callerLineNumber}");
+        }
+
+        [NotNull]
+        [ContractAnnotation("value:null => halt")]
+        public static T NotNull<T>(this T value, [CallerMemberName] string callerMemberName = null, [CallerFilePath] string callerFilePath = null, [CallerLineNumber] int callerLineNumber = 0)
+            where T : class
+        {
+            // ReSharper disable ExplicitCallerInfoArgument
+            assert(value != null, callerMemberName: callerMemberName, callerFilePath: callerFilePath, callerLineNumber: callerLineNumber);
+            // ReSharper restore ExplicitCallerInfoArgument
+
+            return value;
         }
     }
 }
