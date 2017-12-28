@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 using Decked.Core;
 
@@ -15,18 +16,18 @@ namespace Decked.UI.Console
     [UsedImplicitly]
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             if (Debugger.IsAttached)
             {
-                Execute(args);
+                await Execute(args);
 
                 return;
             }
 
             try
             {
-                Execute(args);
+                await Execute(args);
             }
             catch (Exception ex)
             {
@@ -36,7 +37,7 @@ namespace Decked.UI.Console
             }
         }
 
-        private static void Execute(string[] args)
+        private static Task Execute(string[] args)
         {
             var logger = new ConsoleLogger();
 
@@ -57,7 +58,7 @@ namespace Decked.UI.Console
             var initialScreen = ScreenConfiguration.Load(options.MainScreenFilename);
 
             var deck = new DeckRunner(logger, initialScreen);
-            deck.Run();
+            return deck.Run();
         }
     }
 }

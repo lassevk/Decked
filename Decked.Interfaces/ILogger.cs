@@ -6,6 +6,7 @@ namespace Decked.Interfaces
     [PublicAPI]
     public interface ILogger
     {
-        void Log(string line);
+        void Debug([NotNull] string line);
+        void Log([NotNull] string line);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 using Decked.Interfaces;
 
@@ -30,9 +31,21 @@ namespace Decked.Core
             throw new NotImplementedException();
         }
 
-        public void Run()
+        public async Task Run()
         {
-            throw new NotImplementedException();
+            BindToScreen();
+            while (true)
+            {
+                await Task.Delay(500);
+            }
+        }
+
+        private void BindToScreen()
+        {
+        }
+
+        private void UnbindFromScreen()
+        {
         }
     }
 }
