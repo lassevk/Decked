@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using JetBrains.Annotations;
 
@@ -15,5 +16,15 @@ namespace Decked.Core
 
         [UsedImplicitly, CanBeNull]
         public string Property { get; set; }
+
+        [NotNull, ItemNotNull]
+        public IEnumerable<string> GetProblems()
+        {
+            if (Assembly == null)
+                yield return "Missing assembly name";
+
+            if (Type == null)
+                yield return "Missing type name";
+        }
     }
 }
