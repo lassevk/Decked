@@ -7,7 +7,7 @@ using Decked.Core;
 using JetBrains.Annotations;
 using Opt;
 
-using static Decked.Core.ReSharperAssumptions;
+using static Decked.Core.ReSharperValidations;
 
 namespace Decked.UI.Console
 {
@@ -16,6 +16,8 @@ namespace Decked.UI.Console
     {
         static void Main(string[] args)
         {
+            var logger = new ConsoleLogger();
+
             var options = OptParser.Parse<CommandLineOptions>(args);
             assume(options != null);
 
@@ -30,7 +32,10 @@ namespace Decked.UI.Console
             assume(options.MainScreenFilename != null);
             System.Console.WriteLine($"loading screen {Path.GetFullPath(options.MainScreenFilename)}");
 
-            var screen = ScreenConfiguration.Load(options.MainScreenFilename);
+            var initialScreen = ScreenConfiguration.Load(options.MainScreenFilename);
+
+            var deck = new DeckRunner(logger, initialScreen);
+            deck.Run();
         }
     }
 }

@@ -46,13 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeckRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReSharperAssumptions.cs" />
+    <Compile Include="ReSharperValidations.cs" />
+    <Compile Include="Screen.cs" />
     <Compile Include="ScreenButtonConfiguration.cs" />
     <Compile Include="ScreenConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Decked.BuildingBlocks\Decked.BuildingBlocks.csproj">
+      <Project>{313a03c5-beac-42a8-ab03-4bc2b9a97fd3}</Project>
+      <Name>Decked.BuildingBlocks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Decked.BuiltIn\Decked.BuiltIn.csproj">
+      <Project>{4afcb49e-6507-4bfb-a7f9-627c2eec202d}</Project>
+      <Name>Decked.BuiltIn</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Decked.Interfaces\Decked.Interfaces.csproj">
+      <Project>{2681b4d4-402e-4a2d-af55-f740dcc25d13}</Project>
+      <Name>Decked.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

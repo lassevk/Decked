@@ -7,6 +7,8 @@ using JetBrains.Annotations;
 
 using Newtonsoft.Json;
 
+using static Decked.Core.ReSharperValidations;
+
 namespace Decked.Core
 {
     [UsedImplicitly]
@@ -18,12 +20,16 @@ namespace Decked.Core
         [UsedImplicitly]
         public Dictionary<int, Dictionary<int, ScreenButtonConfiguration>> Buttons { get; } = new Dictionary<int, Dictionary<int, ScreenButtonConfiguration>>();
 
+        [NotNull]
         public static ScreenConfiguration Load([NotNull] string filename)
         {
             if (filename == null)
                 throw new ArgumentNullException(nameof(filename));
 
-            return JsonConvert.DeserializeObject<ScreenConfiguration>(File.ReadAllText(filename, Encoding.UTF8));
+            var configuration = JsonConvert.DeserializeObject<ScreenConfiguration>(File.ReadAllText(filename, Encoding.UTF8));
+            assert(configuration != null);
+
+            return configuration;
         }
     }
 }
