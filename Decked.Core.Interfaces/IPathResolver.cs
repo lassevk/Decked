@@ -2,7 +2,7 @@
 
 using JetBrains.Annotations;
 
-namespace Decked.Interfaces
+namespace Decked.Core.Interfaces
 {
     public interface IPathResolver
     {

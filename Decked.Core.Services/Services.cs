@@ -1,12 +1,13 @@
 ﻿using System;
 
+using Decked.Core.Interfaces;
 using Decked.Interfaces;
 
 using DryIoc;
 
 using JetBrains.Annotations;
 
-namespace Decked
+namespace Decked.Core.Services
 {
     internal static class Services
     {

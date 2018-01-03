@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 using Decked.BuildingBlocks;
+using Decked.Core.Interfaces;
 using Decked.Interfaces;
 
 using DryIoc;
@@ -13,7 +14,7 @@ using DryIoc;
 using JetBrains.Annotations;
 using Opt;
 
-using static Decked.ReSharperValidations;
+using static Decked.Core.Framework.ReSharperValidations;
 
 namespace Decked.UI.Console
 {
@@ -43,7 +44,12 @@ namespace Decked.UI.Console
 
         private static void Execute(string[] args)
         {
-            Services.Configure(args ?? new string[0]).Resolve<IDeckRunner>().NotNull().Run().GetAwaiter().GetResult();
+            var container = Services.Configure(args ?? new string[0]);
+
+            foreach (var deck in container.Resolve<IStreamDeckLocator>().FindAll())
+                System.Console.WriteLine(deck);
+
+            // container.Resolve<IDeckRunner>().NotNull().Run().GetAwaiter().GetResult();
         }
     }
 }

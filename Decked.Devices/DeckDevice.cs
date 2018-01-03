@@ -3,6 +3,8 @@ using System.Collections.Concurrent;
 using System.Drawing;
 using System.Threading.Tasks;
 
+using Decked.Core.Interfaces;
+
 using JetBrains.Annotations;
 
 namespace Decked.Devices

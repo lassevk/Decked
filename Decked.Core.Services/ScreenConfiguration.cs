@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+using Decked.Core.Framework;
+
 using JetBrains.Annotations;
 
 using Newtonsoft.Json;
 
-namespace Decked
+namespace Decked.Core.Services
 {
     [UsedImplicitly]
     public class ScreenConfiguration

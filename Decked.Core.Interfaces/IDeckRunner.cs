@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using JetBrains.Annotations;
 
-namespace Decked
+namespace Decked.Core.Interfaces
 {
     public interface IDeckRunner
     {

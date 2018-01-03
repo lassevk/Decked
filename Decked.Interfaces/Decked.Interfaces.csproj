@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="IDeckRunnerOptions.cs" />
     <Compile Include="ILogger.cs" />
-    <Compile Include="IPathResolver.cs" />
     <Compile Include="IStreamDeckApplication.cs" />
     <Compile Include="IStreamDeckButton.cs" />
     <Compile Include="IStreamDeckServices.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 
+using Decked.Core.Framework;
 using Decked.Interfaces;
 
 using DryIoc;
@@ -9,7 +10,7 @@ using JetBrains.Annotations;
 
 using Opt;
 
-using static Decked.ReSharperValidations;
+using static Decked.Core.Framework.ReSharperValidations;
 
 namespace Decked.UI.Console
 {
@@ -33,7 +34,8 @@ namespace Decked.UI.Console
             container.RegisterInstance<IDeckRunnerOptions>(options);
             container.Register<ILogger, ConsoleLogger>(Reuse.Singleton);
             
-            Decked.Services.Register(container);
+            Decked.Core.Framework.Services.Register(container);
+            Decked.Core.Services.Services.Register(container);
             Decked.Devices.Services.Register(container);
             Decked.BuildingBlocks.Services.Register(container);
             Decked.BuiltIn.Services.Register(container);

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
 
+using Decked.Core.Framework;
+using Decked.Core.Interfaces;
 using Decked.Interfaces;
 
 using JetBrains.Annotations;
 
-namespace Decked
+namespace Decked.Core.Services
 {
     public class PathResolver : IPathResolver
     {

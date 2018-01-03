@@ -6,9 +6,9 @@ using JetBrains.Annotations;
 
 // ReSharper disable InconsistentNaming
 
-namespace Decked
+namespace Decked.Core.Framework
 {
-    internal static class ReSharperValidations
+    public static class ReSharperValidations
     {
         [Conditional("DEBUG")]
         [ContractAnnotation("expression:false => halt")]

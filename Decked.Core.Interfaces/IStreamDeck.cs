@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Decked.Devices
+namespace Decked.Core.Interfaces
 {
     public interface IStreamDeck
     {

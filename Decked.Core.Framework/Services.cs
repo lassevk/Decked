@@ -1,13 +1,10 @@
 ﻿using System;
 
-using Decked.Core.Interfaces;
-using Decked.Interfaces;
-
 using DryIoc;
 
 using JetBrains.Annotations;
 
-namespace Decked.Devices
+namespace Decked.Core.Framework
 {
     internal static class Services
     {
@@ -15,9 +12,6 @@ namespace Decked.Devices
         {
             if (container == null)
                 throw new ArgumentNullException(nameof(container));
-
-            container.Register<IStreamDeckLocator, StreamDeckLocator>();
-            container.Register<IStreamDeck, StreamDeck>();
         }
     }
 }

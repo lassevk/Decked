@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
+using Decked.Core.Framework;
+using Decked.Core.Interfaces;
 using Decked.Interfaces;
 
 using DryIoc;
 
 using JetBrains.Annotations;
 
-namespace Decked
+namespace Decked.Core.Services
 {
     public class Screen
     {

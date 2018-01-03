@@ -75,9 +75,17 @@
       <Project>{4afcb49e-6507-4bfb-a7f9-627c2eec202d}</Project>
       <Name>Decked.BuiltIn</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Decked.Core\Decked.Core.csproj">
-      <Project>{1968f79f-9cbd-4635-a714-8657e9aa9750}</Project>
-      <Name>Decked.Core</Name>
+    <ProjectReference Include="..\Decked.Core.Framework\Decked.Core.Framework.csproj">
+      <Project>{31e493ee-a134-4752-9f04-da4ffa450bc6}</Project>
+      <Name>Decked.Core.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Decked.Core.Interfaces\Decked.Core.Interfaces.csproj">
+      <Project>{f0d2622e-f8a3-482f-b035-c74816fd00e9}</Project>
+      <Name>Decked.Core.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Decked.Core.Services\Decked.Core.Services.csproj">
+      <Project>{930e80de-e4af-4c09-b62c-fa1adb51b2aa}</Project>
+      <Name>Decked.Core.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Decked.Devices\Decked.Devices.csproj">
       <Project>{33ce687d-4f96-4ee9-9b61-de5c43de1cb9}</Project>

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
+using Decked.Core.Framework;
+using Decked.Core.Interfaces;
 using Decked.Interfaces;
 
 using JetBrains.Annotations;
 
-using Container = DryIoc.Container;
-
-namespace Decked
+namespace Decked.Core.Services
 {
     public class DeckRunner : IStreamDeckServices, IDeckRunner
     {
@@ -20,16 +19,20 @@ namespace Decked
         [NotNull]
         private readonly IDeckRunnerOptions _Options;
 
+        [NotNull]
+        private readonly IStreamDeckLocator _StreamDeckLocator;
+
         [CanBeNull]
         private Screen _Screen;
 
         //[NotNull]
         //private readonly DeckDevice _Device;
 
-        public DeckRunner([NotNull] ILogger logger, [NotNull] IDeckRunnerOptions options)
+        public DeckRunner([NotNull] ILogger logger, [NotNull] IDeckRunnerOptions options, [NotNull] IStreamDeckLocator streamDeckLocator)
         {
             _Logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _Options = options ?? throw new ArgumentNullException(nameof(options));
+            _StreamDeckLocator = streamDeckLocator ?? throw new ArgumentNullException(nameof(streamDeckLocator));
         }
 
         public void InitializeScreen([NotNull] ScreenConfiguration initialScreen)

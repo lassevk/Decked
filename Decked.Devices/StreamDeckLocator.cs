@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Decked.Core.Framework;
+using Decked.Core.Interfaces;
+using Decked.Interfaces;
+
 using HidLibrary;
 
 using JetBrains.Annotations;
@@ -8,13 +12,13 @@ using JetBrains.Annotations;
 namespace Decked.Devices
 {
     [UsedImplicitly]
-    internal class StreamDeckLocator : IStreamDeckLocator
+    public class StreamDeckLocator : IStreamDeckLocator
     {
         [NotNull]
         private readonly Func<HidDevice, IStreamDeck> _GetStreamDeck;
 
         private const int _ElgatoVendorId = 0x00000fd9;
-        private const int _ElgatoStreamDeckProductId = 0x00000009;
+        private const int _ElgatoStreamDeckProductId = 0x00000060;
 
         public StreamDeckLocator([NotNull] Func<HidDevice, IStreamDeck> getStreamDeck)
         {

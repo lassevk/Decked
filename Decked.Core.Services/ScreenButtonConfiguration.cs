@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using JetBrains.Annotations;
 
-namespace Decked
+namespace Decked.Core.Services
 {
     [UsedImplicitly]
     public class ScreenButtonConfiguration

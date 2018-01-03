@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using JetBrains.Annotations;
 
-namespace Decked.Devices
+namespace Decked.Core.Interfaces
 {
     public interface IStreamDeckLocator
     {
