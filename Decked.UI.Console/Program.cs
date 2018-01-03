@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Decked.BuildingBlocks;
 using Decked.Core.Interfaces;
+using Decked.Devices;
 using Decked.Interfaces;
 
 using DryIoc;
@@ -46,8 +47,12 @@ namespace Decked.UI.Console
         {
             var container = Services.Configure(args ?? new string[0]);
 
-            foreach (var deck in container.Resolve<IStreamDeckLocator>().FindAll())
-                System.Console.WriteLine(deck);
+            IStreamDeckDriver deck = container.Resolve<IStreamDeckDriver>();
+            while (true)
+            {
+                StreamDeckKeyEvent evt = deck.GetNextKeyEvent().GetAwaiter().GetResult();
+                System.Console.WriteLine(evt);
+            }
 
             // container.Resolve<IDeckRunner>().NotNull().Run().GetAwaiter().GetResult();
         }

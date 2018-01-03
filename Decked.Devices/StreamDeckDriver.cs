@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -9,23 +10,25 @@ using JetBrains.Annotations;
 
 namespace Decked.Devices
 {
-    public class DeckDevice : IDeckDevice
+    public class StreamDeckDriver : IStreamDeckDriver
     {
         private const int _MaxColumns = 5;
         private const int _MaxRows = 3;
         private const int _IconWidth = 72;
         private const int _IconHeight = 72;
 
-        //[NotNull]
-        //private readonly IStreamDeck _Device;
+        [NotNull]
+        private readonly IStreamDeck _Device;
 
         [NotNull]
-        private readonly ConcurrentQueue<(int column, int row, bool isDown)> _KeyEvents = new ConcurrentQueue<(int column, int row, bool isDown)>();
+        private readonly bool[] _CurrentKeyState = new bool[15];
 
-        private DeckDevice([NotNull] IStreamDeck device)
+        [NotNull]
+        private readonly Queue<StreamDeckKeyEvent> _KeyEvents = new Queue<StreamDeckKeyEvent>();
+
+        public StreamDeckDriver([NotNull] IStreamDeck device)
         {
-            //_Device = device ?? throw new ArgumentNullException(nameof(device));
-            //_Device.KeyPressed += _Device_KeyPressed;
+            _Device = device ?? throw new ArgumentNullException(nameof(device));
         }
 
         //private void _Device_KeyPressed(object sender, StreamDeckKeyEventArgs e)
@@ -80,12 +83,25 @@ namespace Decked.Devices
         }
 
         [CanBeNull]
-        public (int column, int row, bool isPush)? GetNextKeyEvent()
+        public async Task<StreamDeckKeyEvent> GetNextKeyEvent()
         {
-            if (_KeyEvents.TryDequeue(out var result))
-                return result;
+            while (_KeyEvents.Count == 0)
+                await PollForEvents();
 
-            return null;
+            return _KeyEvents.Dequeue();
+        }
+
+        private async Task PollForEvents()
+        {
+            bool[] state = await _Device.GetNextKeyState();
+            for (int index = 0; index < 15; index++)
+                if (state[index] != _CurrentKeyState[index])
+                {
+                    _CurrentKeyState[index] = state[index];
+
+                    var (column, row) = _Device.DecodeButtonIndexToPosition(index);
+                    _KeyEvents.Enqueue(new StreamDeckKeyEvent(column, row, state[index]));
+                }
         }
     }
 }

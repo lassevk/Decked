@@ -1,7 +1,7 @@
 ﻿using System;
 
+using Decked.Core.Framework;
 using Decked.Core.Interfaces;
-using Decked.Interfaces;
 
 using DryIoc;
 
@@ -17,7 +17,8 @@ namespace Decked.Devices
                 throw new ArgumentNullException(nameof(container));
 
             container.Register<IStreamDeckLocator, StreamDeckLocator>();
-            container.Register<IStreamDeck, StreamDeck>();
+            container.RegisterDelegate(resolver => resolver.Resolve<IStreamDeckLocator>().NotNull().GetInstance());
+            container.Register<IStreamDeckDriver, StreamDeckDriver>(Reuse.Singleton);
         }
     }
 }

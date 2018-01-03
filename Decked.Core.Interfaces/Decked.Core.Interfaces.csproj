@@ -50,7 +50,7 @@
     <Compile Include="IDeckRunner.cs" />
     <Compile Include="IPathResolver.cs" />
     <Compile Include="IStreamDeck.cs" />
-    <Compile Include="IStreamDeckLocator.cs" />
+    <Compile Include="IStreamDeckDeviceLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
