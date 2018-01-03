@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 using JetBrains.Annotations;
 
@@ -8,5 +9,6 @@ namespace Decked.Interfaces
     public interface IStreamDeckServices
     {
         void SwitchToScreen([NotNull] string screenName);
+        Task Run();
     }
 }

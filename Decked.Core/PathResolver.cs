@@ -5,16 +5,22 @@ using Decked.Interfaces;
 
 using JetBrains.Annotations;
 
-namespace Decked.Core
+namespace Decked
 {
     public class PathResolver : IPathResolver
     {
         [NotNull]
         private readonly string _BasePath;
 
-        public PathResolver([NotNull] string basePath)
+        public PathResolver([NotNull] IDeckRunnerOptions options)
         {
-            _BasePath = basePath ?? throw new ArgumentNullException(nameof(basePath));
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
+
+            if (options.MainScreenFilename == null)
+                throw new ArgumentException("options.MainScreenFilename is null", nameof(options));
+
+            _BasePath = Path.GetDirectoryName(Path.GetFullPath(options.MainScreenFilename)).NotNull();
         }
 
         public string ResolveRelativePath([NotNull] string path)

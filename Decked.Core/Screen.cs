@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -10,9 +9,7 @@ using DryIoc;
 
 using JetBrains.Annotations;
 
-using static Decked.Core.ReSharperValidations;
-
-namespace Decked.Core
+namespace Decked
 {
     public class Screen
     {
@@ -63,8 +60,8 @@ namespace Decked.Core
         [NotNull]
         private (IStreamDeckApplication application, IStreamDeckButton button) InitializeButton([NotNull] ScreenButtonConfiguration buttonConfigurationValue)
         {
-            assume(buttonConfigurationValue.Type != null, "Type presence should've been validated during load");
-            assume(buttonConfigurationValue.Assembly != null, "Assembly presence should've been validated during load");
+            ReSharperValidations.assume(buttonConfigurationValue.Type != null, "Type presence should've been validated during load");
+            ReSharperValidations.assume(buttonConfigurationValue.Assembly != null, "Assembly presence should've been validated during load");
 
             var instance = LoadInstance(buttonConfigurationValue.Type, buttonConfigurationValue.Assembly);
 

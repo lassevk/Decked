@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decked.BuiltIn", "Decked.Bu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decked.BuildingBlocks", "Decked.BuildingBlocks\Decked.BuildingBlocks.csproj", "{313A03C5-BEAC-42A8-AB03-4BC2B9A97FD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decked.Devices", "Decked.Devices\Decked.Devices.csproj", "{33CE687D-4F96-4EE9-9B61-DE5C43DE1CB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{313A03C5-BEAC-42A8-AB03-4BC2B9A97FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{313A03C5-BEAC-42A8-AB03-4BC2B9A97FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{313A03C5-BEAC-42A8-AB03-4BC2B9A97FD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33CE687D-4F96-4EE9-9B61-DE5C43DE1CB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33CE687D-4F96-4EE9-9B61-DE5C43DE1CB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33CE687D-4F96-4EE9-9B61-DE5C43DE1CB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33CE687D-4F96-4EE9-9B61-DE5C43DE1CB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

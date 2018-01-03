@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FFD9B441-2E62-4FF8-906E-43EDBCC28192}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Decked.UI.Console</RootNamespace>
-    <AssemblyName>Decked.UI.Console</AssemblyName>
+    <ProjectGuid>{33CE687D-4F96-4EE9-9B61-DE5C43DE1CB9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Decked.Devices</RootNamespace>
+    <AssemblyName>Decked.Devices</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -21,11 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -37,17 +33,15 @@
     <Reference Include="DryIoc, Version=2.12.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DryIoc.dll.2.12.6\lib\net45\DryIoc.dll</HintPath>
     </Reference>
+    <Reference Include="HidLibrary, Version=3.2.46.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\hidlibrary.3.2.46.0\lib\HidLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Opt.Net, Version=0.1.0.48, Culture=neutral, PublicKeyToken=9e2fabf3af85dba9, processorArchitecture=MSIL">
-      <HintPath>..\packages\Opt.Net.0.1.0.48\lib\net35-Client\Opt.Net.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,32 +50,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandLineOptions.cs" />
-    <Compile Include="ConsoleLogger.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="DeckDevice.cs" />
+    <Compile Include="IDeckDevice.cs" />
+    <Compile Include="IStreamDeck.cs" />
+    <Compile Include="IStreamDeckLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services.cs" />
+    <Compile Include="StreamDeckLocator.cs">
+      <DependentUpon>IStreamDeckLocator.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Decked.BuildingBlocks\Decked.BuildingBlocks.csproj">
-      <Project>{313a03c5-beac-42a8-ab03-4bc2b9a97fd3}</Project>
-      <Name>Decked.BuildingBlocks</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Decked.BuiltIn\Decked.BuiltIn.csproj">
-      <Project>{4afcb49e-6507-4bfb-a7f9-627c2eec202d}</Project>
-      <Name>Decked.BuiltIn</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Decked.Core\Decked.Core.csproj">
       <Project>{1968f79f-9cbd-4635-a714-8657e9aa9750}</Project>
       <Name>Decked.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Decked.Devices\Decked.Devices.csproj">
-      <Project>{33ce687d-4f96-4ee9-9b61-de5c43de1cb9}</Project>
-      <Name>Decked.Devices</Name>
     </ProjectReference>
     <ProjectReference Include="..\Decked.Interfaces\Decked.Interfaces.csproj">
       <Project>{2681b4d4-402e-4a2d-af55-f740dcc25d13}</Project>

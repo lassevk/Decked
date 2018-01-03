@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDeckRunnerOptions.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="IPathResolver.cs" />
     <Compile Include="IStreamDeckApplication.cs" />

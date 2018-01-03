@@ -2,21 +2,26 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+
+using Decked.Interfaces;
+
 using JetBrains.Annotations;
 
 namespace Decked.UI.Console
 {
     [PublicAPI]
-    public class CommandLineOptions
+    public class CommandLineOptions : IDeckRunnerOptions
     {
+        private string _MainScreenFilename = string.Empty;
+
         [Description("The path to the configuration file for the initial screen")]
         [Opt.Argument(OrderIndex = 1)]
         public string MainScreenFilename
         {
-            get;
+            get { return _MainScreenFilename; }
 
             [UsedImplicitly]
-            set;
+            set { _MainScreenFilename = value ?? string.Empty; }
         }
 
         [Opt.BooleanOption("-v")]
@@ -24,7 +29,6 @@ namespace Decked.UI.Console
         [Description("Verbose output, include debug messages")]
         public bool Verbose { get; set; }
 
-        [NotNull, ItemNotNull]
         public IEnumerable<string> GetProblems()
         {
             if (string.IsNullOrWhiteSpace(MainScreenFilename))

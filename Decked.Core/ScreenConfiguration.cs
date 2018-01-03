@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Text;
 
@@ -8,9 +7,7 @@ using JetBrains.Annotations;
 
 using Newtonsoft.Json;
 
-using static Decked.Core.ReSharperValidations;
-
-namespace Decked.Core
+namespace Decked
 {
     [UsedImplicitly]
     public class ScreenConfiguration
@@ -56,7 +53,7 @@ namespace Decked.Core
                 throw new ArgumentNullException(nameof(filename));
 
             var configuration = JsonConvert.DeserializeObject<ScreenConfiguration>(File.ReadAllText(filename, Encoding.UTF8));
-            assert(configuration != null);
+            ReSharperValidations.assert(configuration != null);
 
             return configuration;
         }

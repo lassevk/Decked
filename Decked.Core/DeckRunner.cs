@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,27 +8,28 @@ using Decked.Interfaces;
 
 using JetBrains.Annotations;
 
-using static Decked.Core.ReSharperValidations;
-
 using Container = DryIoc.Container;
 
-namespace Decked.Core
+namespace Decked
 {
-    public class DeckRunner : IStreamDeckServices
+    public class DeckRunner : IStreamDeckServices, IDeckRunner
     {
         [NotNull]
-        private readonly Container _Container;
+        private readonly ILogger _Logger;
+
+        [NotNull]
+        private readonly IDeckRunnerOptions _Options;
 
         [CanBeNull]
         private Screen _Screen;
 
-        [NotNull]
-        private readonly DeckDevice _Device;
+        //[NotNull]
+        //private readonly DeckDevice _Device;
 
-        public DeckRunner([NotNull] Container container, [NotNull] ILogger logger, [NotNull] PathResolver pathResolver)
+        public DeckRunner([NotNull] ILogger logger, [NotNull] IDeckRunnerOptions options)
         {
-            _Container = container ?? throw new ArgumentNullException(nameof(container));
-            _Device = DeckDevice.GetInstance() ?? throw new InvalidOperationException("No Stream Deck device found");
+            _Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _Options = options ?? throw new ArgumentNullException(nameof(options));
         }
 
         public void InitializeScreen([NotNull] ScreenConfiguration initialScreen)
@@ -39,55 +39,63 @@ namespace Decked.Core
 
         private Screen LoadScreen([NotNull] ScreenConfiguration configuration)
         {
-            var screen = new Screen(_Container, configuration);
-            screen.InitializeButtons();
+            throw new NotImplementedException();
 
-            return screen;
+            //var screen = new Screen(_Container, configuration);
+            //screen.InitializeButtons();
+
+            //return screen;
         }
 
         public void SwitchToScreen(string screenName)
         {
             throw new NotImplementedException();
         }
-
+        
         public async Task Run()
         {
-            BindToScreen();
+            await Task.Delay(1).NotNull();
 
-            while (true)
-            {
-                foreach (var app in _Screen.GetApplications())
-                    app.OnIdle();
+            _Logger.Log($"loading screen {Path.GetFullPath(_Options.MainScreenFilename)}");
 
-                await Task.Yield();
-                (int column, int row, bool isPush)? key = _Device.GetNextKeyEvent();
+            var initialScreenConfiguration = ScreenConfiguration.Load(_Options.MainScreenFilename);
 
-                if (key.HasValue)
-                {
-                    assume(_Screen != null);
-                    var button = _Screen.GetButtons().Where(btn => btn.row == key.Value.row && btn.column == key.Value.column).Select(btn => btn.button).FirstOrDefault();
+            //BindToScreen();
 
-                    if (key.Value.isPush)
-                        button?.Push();
-                    else
-                        button?.Release();
-                }
-            }
+            //while (true)
+            //{
+            //    foreach (var app in _Screen.GetApplications())
+            //        app.OnIdle();
+
+            //    await Task.Yield();
+            //    (int column, int row, bool isPush)? key = _Device.GetNextKeyEvent();
+
+            //    if (key.HasValue)
+            //    {
+            //        ReSharperValidations.assume(_Screen != null);
+            //        var button = _Screen.GetButtons().Where(btn => btn.row == key.Value.row && btn.column == key.Value.column).Select(btn => btn.button).FirstOrDefault();
+
+            //        if (key.Value.isPush)
+            //            button?.Push();
+            //        else
+            //            button?.Release();
+            //    }
+            //}
         }
 
         private void BindToScreen()
         {
-            if (_Screen == null)
-                return;
+            //if (_Screen == null)
+            //    return;
 
-            foreach (var app in _Screen.GetApplications())
-                app.OnSetUp();
+            //foreach (var app in _Screen.GetApplications())
+            //    app.OnSetUp();
 
-            foreach (var button in _Screen.GetButtons())
-            {
-                _Device.SetButtonIcon(button.column, button.row, button.button.NotNull().Icon);
-                button.button.PropertyChanged += ButtonPropertyChanged;
-            }
+            //foreach (var button in _Screen.GetButtons())
+            //{
+            //    _Device.SetButtonIcon(button.column, button.row, button.button.NotNull().Icon);
+            //    button.button.PropertyChanged += ButtonPropertyChanged;
+            //}
         }
 
         private void ButtonPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -108,11 +116,11 @@ namespace Decked.Core
 
         private void RefreshIconForButton(IStreamDeckButton button)
         {
-            foreach (var existingButton in _Screen.GetButtons())
-            {
-                if (ReferenceEquals(button, existingButton.button))
-                    _Device.SetButtonIcon(existingButton.column, existingButton.row, existingButton.button.NotNull().Icon);
-            }
+            //foreach (var existingButton in _Screen.GetButtons())
+            //{
+            //    if (ReferenceEquals(button, existingButton.button))
+            //        _Device.SetButtonIcon(existingButton.column, existingButton.row, existingButton.button.NotNull().Icon);
+            //}
         }
 
         private void UnbindFromScreen()

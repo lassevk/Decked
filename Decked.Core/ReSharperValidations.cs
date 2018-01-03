@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+
 using JetBrains.Annotations;
 
 // ReSharper disable InconsistentNaming
 
-namespace Decked.Core
+namespace Decked
 {
     internal static class ReSharperValidations
     {
